@@ -1,56 +1,43 @@
 const { User } = require('../models');
+const { ObjectId } = require('mongodb');
+
+// I'd like to not need to pass the request object in, but I don't really know how to avoid that
+const users = req => 
+	req.client.db(process.env.db_name).collection("users");
 
 const userController = {
-	getAllUser(req, res) {
-		console.log("get all users");
-			// .then(dbUserData => res.json(dbUserData))
-			// .catch(err => {
-				// console.log(err);
-				// res.status(400).json(err);
-			// });
-		res.status(200).send();
-		return;
+	async getAllUser(req, res) {
+		const userList = await users(req).find({}).toArray();
+		res.json(userList);
 	},
 
-	getUserById({ params }, res) {
-			// .then(dbUserData => {
-				// if (!dbUserData) {
-					// res.status(404).json({ message: 'No user found with this id!' });
-					// return;
-				// }
-				// res.json(dbUserData);
-			// })
-			// .catch(err => {
-				// console.log(err);
-				// res.status(400).json(err);
-			// });
+	async getUserById(req, res) {
+		const _id = new ObjectId(req.params.id);
+		
+		const user = await users(req).find({_id}).toArray();
+		res.json(user);
 	},
 		
-	createUser({ body }, res) {
-			// .then(dbUserData => res.json(dbUserData))
-			// .catch(err => res.status(400).json(err));
+	async createUser(req , res) {
+		const result = await users(req).insertOne(req.body)
+		res.status(200).send();
 	},
 
-	updateUser({ params, body }, res) {
-			// .then(dbUserData => {
-				// if (!dbUserData) {
-					// res.status(404).json({ message: 'No user found with this id!' });
-					// return;
-				// }
-				// res.json(dbUserData);
-			// })
-			// .catch(err => res.status(400).json(err));
+	async updateUser(req, res) {
+		const _id = new ObjectId(req.params.id);
+		
+		const result = await users(req).updateOne(
+			{ _id },
+			{	$set: req.body }
+		);
+		res.status(200).send();
 	},	
 
-	deleteUser({ params }, res) {
-			// .then(dbUserData => {
-				// if (!dbUserData) {
-					// res.status(404).json({ message: 'No user found with this id!' });
-					// return;
-				// }
-				// res.json(dbUserData);
-			// })
-			// .catch(err => res.status(400).json(err));
+	async deleteUser(req, res) {
+		const _id = new ObjectId(req.params.id);
+
+		const result = await users(req).remove({ _id });
+		res.status(200).send();
 	}
 };
 

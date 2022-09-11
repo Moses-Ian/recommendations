@@ -3,6 +3,9 @@ const routes = require('./routes');
 const path = require('path');
 const helpers = require('./utils/helpers');
 const client = require('./config/connection');
+require("dotenv").config({ path: path.join(__dirname, "..", ".env") });
+
+console.log(process.env.DB_NAME);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
