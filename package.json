@@ -1,0 +1,25 @@
+{
+  "name": "recommendations",
+  "version": "1.0.0",
+  "description": "Share film and TV recommendations with your friends.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+		"start": "cd server && npm run watch",
+		"install": "cd server && npm i"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Moses-Ian/recommendations.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Moses-Ian/recommendations/issues"
+  },
+  "homepage": "https://github.com/Moses-Ian/recommendations#readme",
+  "devDependencies": {
+    "concurrently": "^7.4.0"
+  }
+}
