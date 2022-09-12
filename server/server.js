@@ -4,6 +4,7 @@ const path = require('path');
 const helpers = require('./utils/helpers');
 const client = require('./config/connection');
 require("dotenv").config({ path: path.join(__dirname, "..", ".env") });
+const { authMiddleware } = require('./utils/auth');
 
 console.log(process.env.DB_NAME);
 
@@ -18,6 +19,7 @@ app.use((req, res, next) => {
 	next();
 });
 
+app.use(authMiddleware);
 app.use(routes);
 
 app.listen(PORT, () => { 

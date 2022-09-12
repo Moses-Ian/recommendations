@@ -1,7 +1,8 @@
 const router = require('express').Router();
 
 const {
-  getAllRecommendation,
+  getUserReceivedRecommendation,
+	getUserSentRecommendation,
   getRecommendationById,
   createRecommendation,
   updateRecommendation,
@@ -11,8 +12,17 @@ const {
 // /api/recommendation
 router
   .route('/')
-  .get(getAllRecommendation)
   .post(createRecommendation);
+	
+// /api/recommendation/received/:id
+router
+	.route('/received/:id')
+	.get(getUserReceivedRecommendation);
+
+// /api/recommendation/sent/:id
+router
+	.route('/sent/:id')
+	.get(getUserSentRecommendation);
 
 // /api/recommendation/:id
 router

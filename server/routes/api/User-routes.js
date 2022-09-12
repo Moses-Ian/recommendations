@@ -5,7 +5,8 @@ const {
   getUserById,
   createUser,
   updateUser,
-  deleteUser
+  deleteUser,
+	login
 } = require('../../controllers/User-controller');
 
 // /api/User
@@ -13,7 +14,12 @@ router
   .route('/')
   .get(getAllUser)
   .post(createUser);
-
+	
+// /api/User/login
+router
+	.route('/login')
+	.post(login);
+	
 // /api/User/:id
 router
   .route('/:id')

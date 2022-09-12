@@ -1,53 +1,64 @@
 const { Recommendation } = require('../models');
+const { ObjectId } = require('mongodb');
+
+// I'd like to not need to pass the request object in, but I don't really know how to avoid that
+const users = req => 
+	req.client.db(process.env.db_name).collection("users");
 
 const recommendationController = {
-	getAllRecommendation(req, res) {
-			// .then(dbRecommendationData => res.json(dbRecommendationData))
-			// .catch(err => {
-				// console.log(err);
-				// res.status(400).json(err);
-			// });
+	async getUserReceivedRecommendation(req, res) {
+		if (!req.token) {
+			res.status(401).send();
+			return;
+		}
+		const _id = new ObjectId(req.user._id);
+		const user = await users(req).findOne({ _id });
+		res.json(user.received);
 	},
 
-	getRecommendationById({ params }, res) {
-			// .then(dbRecommendationData => {
-				// if (!dbRecommendationData) {
-					// res.status(404).json({ message: 'No recommendation found with this id!' });
-					// return;
-				// }
-				// res.json(dbRecommendationData);
-			// })
-			// .catch(err => {
-				// console.log(err);
-				// res.status(400).json(err);
-			// });
+	async getUserSentRecommendation(req, res) {
+		if (!req.token) {
+			res.status(401).send();
+			return;
+		}
+		const _id = new ObjectId(req.user._id);
+		const user = await users(req).findOne({ _id });
+		res.json(user.sent);
+	},
+
+	async getRecommendationById(req, res) {
 	},
 		
-	createRecommendation({ body }, res) {
-			// .then(dbRecommendationData => res.json(dbRecommendationData))
-			// .catch(err => res.status(400).json(err));
+	async createRecommendation(req, res) {
+		if (!token) {
+			res.status(401).send();
+			return;
+		}
+		
+		// get the 'to' field
+		// get the 'from' field
+		const { to, from, title } = req.body;
+		
+		// put in the 'to' user's 'received' list
+		// need to make this atomic
+		const toUser = await users(req).findOneAndUpdate(
+			{ username: to },
+			{ $push: { received: title } }
+		);
+		
+		// put in the 'from' user's 'sent' list
+		const fromUser = await users(req).findOneAndUpdate(
+			{ username: from },
+			{ $push: { sent: title } }
+		);
+		
+		res.status(200).send();
 	},
 
-	updateRecommendation({ params, body }, res) {
-			// .then(dbRecommendationData => {
-				// if (!dbRecommendationData) {
-					// res.status(404).json({ message: 'No recommendation found with this id!' });
-					// return;
-				// }
-				// res.json(dbRecommendationData);
-			// })
-			// .catch(err => res.status(400).json(err));
+	async updateRecommendation(req, res) {
 	},	
 
-	deleteRecommendation({ params }, res) {
-			// .then(dbRecommendationData => {
-				// if (!dbRecommendationData) {
-					// res.status(404).json({ message: 'No recommendation found with this id!' });
-					// return;
-				// }
-				// res.json(dbRecommendationData);
-			// })
-			// .catch(err => res.status(400).json(err));
+	async deleteRecommendation(req, res) {
 	}
 };
 
