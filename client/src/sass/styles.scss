@@ -1,0 +1,33 @@
+@charset "utf-8";
+
+/* set my variables */
+$bg-films: rgb(234, 229, 217);
+$bg-books: rgb(126, 175, 148);
+$bg-podcasts: rgb(115, 115, 115);
+
+/* set my classes */
+.bg-films {
+	background-color: $bg-films;
+}
+
+.bg-books {
+	background-color: $bg-books;
+}
+
+.bg-podcasts { 
+	background-color: $bg-podcasts;
+}
+
+.tabs li {
+	border-radius: 4px 4px 0px 0px;
+}
+
+/* update bulma variables */
+$tabs-border-bottom-width: 0px;
+$tabs-link-hover-color: 'transparent';
+$tabs-link-active-color: 'transparent';
+$tabs-boxed-link-hover-background-color: 'transparent';
+$tabs-boxed-link-active-background-color: 'transparent';
+
+/* import bulma */
+@import "./bulma/bulma.sass";

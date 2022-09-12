@@ -1,8 +1,9 @@
-import 'bulma/css/bulma.min.css';
+// import 'bulma/css/bulma.min.css';
 
 const Tab = ({ activeTab, clickHandler, title, text, color }) => {
 	
-	const className = activeTab === title ? 'is-active' : '';
+	const className = (activeTab === title ? 'is-active ' : ' ')
+		+ color;
 	
 	return (
 		<li 
