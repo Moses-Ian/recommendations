@@ -41,7 +41,7 @@ const Tabs = () => {
 					))}
 				</ul>
 			</div>
-			<div style={ {height: '900px'} } className={`bg-${activeTab}`}>
+			<div className={`full-height bg-${activeTab}`}>
 			</div>
 		</>
 	);

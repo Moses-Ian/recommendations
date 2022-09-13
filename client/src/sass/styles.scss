@@ -6,6 +6,10 @@ $bg-books: rgb(126, 175, 148);
 $bg-podcasts: rgb(115, 115, 115);
 
 /* set my classes */
+.full-height {
+	height: 100%;
+}
+
 .bg-films {
 	background-color: $bg-films;
 }
@@ -20,6 +24,18 @@ $bg-podcasts: rgb(115, 115, 115);
 
 .tabs li {
 	border-radius: 4px 4px 0px 0px;
+}
+
+/* overwrite bulma styles */
+.navbar .navbar-brand {
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+
+.navbar .navbar-brand > .navbar-item,
+.navbar .navbar-brand .navbar-link {
+  display: inline-block;
 }
 
 /* update bulma variables */
