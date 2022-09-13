@@ -11,10 +11,24 @@ const Navbar = () => {
 						Chat
 					</a>
 					
-					<a className="navbar-item">
-						Menu
-					</a>
-					
+					<div className="navbar-item has-dropdown has-dropdown-up is-hoverable">
+						<a className="navbar-link is-arrowless">
+							Menu
+						</a>
+						
+						<div className="navbar-dropdown is-size-7">
+							<a className="navbar-item p-0">
+								Thing 1
+							</a>
+							<a className="navbar-item p-0">
+								Thing 2
+							</a>
+							<a className="navbar-item p-0">
+								Thing 3
+							</a>
+						</div>
+					</div>
+						
 					<a className="navbar-item">
 						Search
 					</a>
