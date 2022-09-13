@@ -1,15 +1,17 @@
+import { Link } from 'react-router-dom';
+
 const Navbar = () => {
 	
 	return (
 		<nav className="navbar is-fixed-bottom" role="navigation" aria-label="main navigation">
 			<div className="navbar-brand">
-					<a className="navbar-item">
+					<Link to='friends' className="navbar-item">
 						Friends
-					</a>
+					</Link>
 					
-					<a className="navbar-item">
+					<Link to='chat' className="navbar-item">
 						Chat
-					</a>
+					</Link>
 					
 					<div className="navbar-item has-dropdown has-dropdown-up is-hoverable">
 						<a className="navbar-link is-arrowless">
@@ -17,25 +19,25 @@ const Navbar = () => {
 						</a>
 						
 						<div className="navbar-dropdown is-size-7">
-							<a className="navbar-item p-0">
+							<Link to='thing1' className="navbar-item p-0">
 								Thing 1
-							</a>
-							<a className="navbar-item p-0">
+							</Link>
+							<Link to='thing2' className="navbar-item p-0">
 								Thing 2
-							</a>
-							<a className="navbar-item p-0">
+							</Link>
+							<Link to='thing3' className="navbar-item p-0">
 								Thing 3
-							</a>
+							</Link>
 						</div>
 					</div>
 						
-					<a className="navbar-item">
+					<Link to='search' className="navbar-item">
 						Search
-					</a>
+					</Link>
 					
-					<a className="navbar-item">
+					<Link to='login' className="navbar-item">
 						Profile
-					</a>
+					</Link>
 			</div>
 		</nav>
 	);
