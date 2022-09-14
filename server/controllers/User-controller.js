@@ -64,6 +64,10 @@ const userController = {
 	async login(req, res) {
 		const { username } = req.body;
 		const user = await users(req).findOne({ username });
+		if (!user) {
+			res.status(401).send();
+			return;
+		}
 		const valid = await bcrypt.compare(req.body.password, user.password);
 		if (!valid) {
 			res.status(401).send();
@@ -74,6 +78,7 @@ const userController = {
 		user.password = null;
 		const token = signToken(user);
 		res.json({ token });
+		console.log(token);
 	}
 };
 

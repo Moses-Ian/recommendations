@@ -6,10 +6,14 @@ const client = require('./config/connection');
 require("dotenv").config({ path: path.join(__dirname, "..", ".env") });
 const { authMiddleware } = require('./utils/auth');
 
-console.log(process.env.DB_NAME);
-
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+// cors for development
+const cors = require('cors');
+app.use(cors({
+	origin: 'http://localhost:3000'
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
