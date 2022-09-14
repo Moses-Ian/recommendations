@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Auth from '../utils/auth';
+import Auth from '../../utils/auth';
 
 const Login = () => {
 	
@@ -57,6 +57,7 @@ const Login = () => {
 			</div>
 			<div>
 				<button 
+					className='button'
 					type="submit"
 				>
 					Log in

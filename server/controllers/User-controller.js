@@ -7,6 +7,13 @@ const { signToken, loggedIn } = require('../utils/auth');
 // I'd like to not need to pass the request object in, but I don't really know how to avoid that
 const users = req => 
 	req.client.db(process.env.db_name).collection("users");
+const createToken = user => {
+	user.lastLogin = DateTime.now();
+	user.password = null;
+	const token = signToken(user);
+	return token;
+}
+
 
 const userController = {
 	async getAllUser(req, res) {
@@ -31,9 +38,12 @@ const userController = {
 	},
 		
 	async createUser(req , res) {
+		// need to block this if the user is already created
 		req.body.password = await bcrypt.hash(req.body.password, 10);
-		const result = await users(req).insertOne(req.body);
-		res.status(200).send();
+		const user = await users(req).insertOne(req.body);
+		const _id = user.insertedId.toString();
+		const token = createToken({ _id });
+		res.json({ token });
 	},
 
 	async updateUser(req, res) {
@@ -73,12 +83,8 @@ const userController = {
 			res.status(401).send();
 			return;
 		}
-		const now = DateTime.now();
-		user.lastLogin = now;
-		user.password = null;
-		const token = signToken(user);
+		const token = createToken(user);
 		res.json({ token });
-		console.log(token);
 	}
 };
 
