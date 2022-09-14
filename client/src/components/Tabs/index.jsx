@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Tab from '../Tab';
+import Shelf from'../Shelf';
 
 const tabList = [
 	{
@@ -40,8 +41,9 @@ const Tabs = () => {
 					))}
 				</ul>
 			</div>
-			<div className={`full-height bg-${activeTab}`}>
-			</div>
+			<Shelf 
+				activeTab={activeTab}
+			/>
 		</>
 	);
 };

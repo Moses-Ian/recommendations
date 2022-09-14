@@ -22,28 +22,24 @@
 }
 
 /* these should be working in bulma but aren't for some reason */
-.navbar-dropdown {
-  display: none;
-}
-
-.has-dropdown.is-hoverable:hover .navbar-dropdown {
-  display: flex;
-}
-
-.navbar-item.has-dropdown-up {
-  position: relative;
-}
-
-.navbar-item.has-dropdown-up .navbar-dropdown {
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-  width: 100%;
-  background-color: white;
-  flex-direction: column;
-  align-items: center;
-}
-
+/* .navbar-dropdown { */
+/* display: none; */
+/* } */
+/* .has-dropdown.is-hoverable:hover .navbar-dropdown { */
+/* display: flex; */
+/* } */
+/* .navbar-item.has-dropdown-up { */
+/* position: relative; */
+/* } */
+/* .navbar-item.has-dropdown-up .navbar-dropdown { */
+/* position: absolute; */
+/* bottom: 100%; */
+/* left: 0; */
+/* width: 100%; */
+/* background-color: white; */
+/* flex-direction: column; */
+/* align-items: center; */
+/* } */
 /* overwrite bulma styles */
 .navbar .navbar-brand {
   text-align: center;

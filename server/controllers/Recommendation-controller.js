@@ -13,7 +13,10 @@ const recommendationController = {
 		}
 		const _id = new ObjectId(req.user._id);
 		const user = await users(req).findOne({ _id });
-		res.json(user.received);
+		if (!user || !user.received) 
+			res.json([]);
+		else
+			res.json(user.received);
 	},
 
 	async getUserSentRecommendation(req, res) {
@@ -25,12 +28,13 @@ const recommendationController = {
 		const user = await users(req).findOne({ _id });
 		res.json(user.sent);
 	},
+	
 
 	async getRecommendationById(req, res) {
 	},
 		
 	async createRecommendation(req, res) {
-		if (!token) {
+		if (!req.token) {
 			res.status(401).send();
 			return;
 		}

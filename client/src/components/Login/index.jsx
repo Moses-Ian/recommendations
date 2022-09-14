@@ -27,6 +27,7 @@ const Login = () => {
 			);
 			const { token } = await response.json();
 			Auth.login(token);
+			console.log('success');
 		} catch (e) {
 			console.log(e);
 		}

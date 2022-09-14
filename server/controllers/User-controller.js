@@ -17,14 +17,14 @@ const createToken = user => {
 
 const userController = {
 	async getAllUser(req, res) {
-		if (!req.token) {
-			res.status(401).send();
-			return;
-		}
-		if (req.user.username !== "imoses2") {
-			res.status(403).send();
-			return;
-		}
+		// if (!req.token) {
+			// res.status(401).send();
+			// return;
+		// }
+		// if (req.user.username !== "imoses2") {
+			// res.status(403).send();
+			// return;
+		// }
 		const userList = await users(req).find({}).toArray();
 		res.json(userList);
 	},
@@ -61,19 +61,20 @@ const userController = {
 	},	
 
 	async deleteUser(req, res) {
-		if (!req.token) {
-			res.status(401).send();
-			return;
-		}
-		const _id = new ObjectId(req.user._id);
+		// if (!req.token) {
+			// res.status(401).send();
+			// return;
+		// }
+		// const _id = new ObjectId(req.user._id);
+		const _id = new ObjectId(req.params._id);
 
 		const result = await users(req).remove({ _id });
 		res.status(200).send();
 	},
 	
 	async login(req, res) {
-		const { username } = req.body;
-		const user = await users(req).findOne({ username });
+		const { email } = req.body;
+		const user = await users(req).findOne({ email });
 		if (!user) {
 			res.status(401).send();
 			return;
