@@ -13,10 +13,13 @@ const recommendationController = {
 		}
 		const _id = new ObjectId(req.user._id);
 		const user = await users(req).findOne({ _id });
-		if (!user || !user.received) 
+		if (!user || !user.received) {
 			res.json([]);
-		else
-			res.json(user.received);
+			return;
+		}
+		
+		res.json(user.received);
+		
 	},
 
 	async getUserSentRecommendation(req, res) {
@@ -41,19 +44,19 @@ const recommendationController = {
 		
 		// get the 'to' field
 		// get the 'from' field
-		const { to, from, title } = req.body;
+		const { to, from, ...recommendation } = req.body;
 		
 		// put in the 'to' user's 'received' list
 		// need to make this atomic
 		const toUser = await users(req).findOneAndUpdate(
 			{ username: to },
-			{ $push: { received: title } }
+			{ $push: { received: recommendation } }
 		);
 		
 		// put in the 'from' user's 'sent' list
 		const fromUser = await users(req).findOneAndUpdate(
 			{ username: from },
-			{ $push: { sent: title } }
+			{ $push: { sent: recommendation } }
 		);
 		
 		res.status(200).send();

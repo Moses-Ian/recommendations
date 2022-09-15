@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import Recommendation from '../Recommendation';
 import Auth from '../../utils/auth';
 
 const Shelf = ({ activeTab }) => {
 
 	const [recommendations, setRecommendations] = useState([]);
+	const type = activeTab.slice(0, -1);
 	
 	useEffect(() => {
 		const getData = async () => {
@@ -34,12 +36,16 @@ const Shelf = ({ activeTab }) => {
 		getData();
 	}, []);
 	
+	console.log(recommendations);
+	console.log(recommendations.filter(item => item.type === type));
+	
 	return (
-		<div className={`full-height bg-${activeTab} is-flex`}>
-			{recommendations.map((item, index) => (
-				<div key={index}>
-					{item}
-				</div>
+		<div className={`full-height bg-${activeTab} is-flex is-flex-wrap-wrap is-justify-content-space-around p-4`}>
+			{recommendations.filter(item => item.type === type).map((item, index) => (
+				<Recommendation
+					key={index}
+					item={item}
+				/>
 			))}
 		</div>
 	);
