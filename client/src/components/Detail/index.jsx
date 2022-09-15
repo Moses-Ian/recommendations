@@ -3,14 +3,14 @@ import { format_runtime } from '../../utils';
 
 const contentRating = detailData => detailData.releases.countries.filter(c => c.iso_3166_1 === 'US' && c.certification)[0].certification;
 
-const Detail = ({ activeTab, detailId }) => {
+const Detail = ({ activeTab, detailItem }) => {
 	
 	const [detailData, setDetailData] = useState(undefined);
 	
 	useEffect(() => {
 		const getData = async () => {
 			// do a fetch
-			const result = await fetch(`http://localhost:3001/api/media/${detailId}`,
+			const result = await fetch(`http://localhost:3001/api/media/${detailItem.id}`,
 				{
 					method: 'GET',
 					mode: 'cors',
@@ -24,7 +24,7 @@ const Detail = ({ activeTab, detailId }) => {
 		};
 		
 		getData();
-	}, [detailId]);
+	}, [detailItem]);
 	
 	if (!detailData)
 		return (

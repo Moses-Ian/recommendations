@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Recommendation from '../Recommendation';
 import Auth from '../../utils/auth';
 
-const Shelf = ({ activeTab, shelfClickHandler }) => {
+const Shelf = ({ activeTab, setDetailItem }) => {
 
 	const [recommendations, setRecommendations] = useState([]);
 	const type = activeTab.slice(0, -1);
@@ -34,6 +34,16 @@ const Shelf = ({ activeTab, shelfClickHandler }) => {
 		
 		getData();
 	}, []);
+	
+	const shelfClickHandler = event => {
+		const id = event.target.dataset.tmdb_id
+		setDetailItem(
+			{
+				id: id,
+				recommendation: recommendations.filter(r => r.tmdb_id === id)[0]
+			}
+		);
+	}
 	
 	return (
 		<div 

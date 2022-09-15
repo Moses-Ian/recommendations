@@ -21,16 +21,18 @@ const tabList = [
 
 const Tabs = () => {
 	const [activeTab, setActiveTab] = useState('films');
-	const [detailId, setDetailId] = useState('');
+	const [detailItem, setDetailItem] = useState('');
 	
 	const clickHandler = event => {
 		setActiveTab(event.currentTarget.dataset.title);
-		setDetailId('');
+		setDetailItem('');
 	}
 	
 	const shelfClickHandler = event => {
-		setDetailId(event.target.dataset.tmdb_id);
+		setDetailItem(event.target.dataset.tmdb_id);
 	}
+	
+	console.log(detailItem);
 	
 	return (
 		<>
@@ -48,15 +50,15 @@ const Tabs = () => {
 					))}
 				</ul>
 			</div>
-			{detailId ?
+			{detailItem ?
 				<Detail
 					activeTab={activeTab}
-					detailId={detailId}
+					detailItem={detailItem}
 				/>
 			:
 				<Shelf 
 					activeTab={activeTab}
-					shelfClickHandler={shelfClickHandler}
+					setDetailItem={setDetailItem}
 				/>
 			}
 		</>
