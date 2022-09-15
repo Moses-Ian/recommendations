@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Tab from '../Tab';
-import Shelf from'../Shelf';
+import Shelf from '../Shelf';
+import Detail from '../Detail';
 
 const tabList = [
 	{
@@ -20,9 +21,15 @@ const tabList = [
 
 const Tabs = () => {
 	const [activeTab, setActiveTab] = useState('films');
+	const [detailId, setDetailId] = useState('');
 	
 	const clickHandler = event => {
 		setActiveTab(event.currentTarget.dataset.title);
+		setDetailId('');
+	}
+	
+	const shelfClickHandler = event => {
+		setDetailId(event.target.dataset.tmdb_id);
 	}
 	
 	return (
@@ -41,9 +48,17 @@ const Tabs = () => {
 					))}
 				</ul>
 			</div>
-			<Shelf 
-				activeTab={activeTab}
-			/>
+			{detailId ?
+				<Detail
+					activeTab={activeTab}
+					detailId={detailId}
+				/>
+			:
+				<Shelf 
+					activeTab={activeTab}
+					shelfClickHandler={shelfClickHandler}
+				/>
+			}
 		</>
 	);
 };

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Recommendation from '../Recommendation';
 import Auth from '../../utils/auth';
 
-const Shelf = ({ activeTab }) => {
+const Shelf = ({ activeTab, shelfClickHandler }) => {
 
 	const [recommendations, setRecommendations] = useState([]);
 	const type = activeTab.slice(0, -1);
@@ -16,13 +16,12 @@ const Shelf = ({ activeTab }) => {
 			const _id = Auth.decodeToken(token).data._id;
 			
 			// do a fetch
-			console.log('fetch');
 			const result = await fetch(`http://localhost:3001/api/recommendation/received/${_id}`, 
 				{
 					method: 'GET',
 					mode: 'cors',
 					headers: { 
-						'Content-Type': 'applications/json',
+						'Content-Type': 'application/json',
 						'Authorization': `Bearer ${token}`
 					},
 				}
@@ -36,15 +35,15 @@ const Shelf = ({ activeTab }) => {
 		getData();
 	}, []);
 	
-	console.log(recommendations);
-	console.log(recommendations.filter(item => item.type === type));
-	
 	return (
-		<div className={`full-height bg-${activeTab} is-flex is-flex-wrap-wrap is-justify-content-space-around p-4`}>
+		<div 
+			className={`full-height bg-${activeTab} is-flex is-flex-wrap-wrap is-justify-content-space-around p-4`}
+		>
 			{recommendations.filter(item => item.type === type).map((item, index) => (
 				<Recommendation
 					key={index}
 					item={item}
+					shelfClickHandler={shelfClickHandler}
 				/>
 			))}
 		</div>

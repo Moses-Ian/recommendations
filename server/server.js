@@ -1,7 +1,7 @@
 const express = require('express');
 const routes = require('./routes');
 const path = require('path');
-const helpers = require('./utils/helpers');
+const helpers = require('./utils');
 const client = require('./config/connection');
 require("dotenv").config({ path: path.join(__dirname, "..", ".env") });
 const { authMiddleware } = require('./utils/auth');
