@@ -17,7 +17,6 @@ const recommendationController = {
 			res.json([]);
 			return;
 		}
-		
 		res.json(user.received);
 		
 	},

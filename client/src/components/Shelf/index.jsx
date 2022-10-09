@@ -45,6 +45,8 @@ const Shelf = ({ activeTab, setDetailItem }) => {
 		);
 	}
 	
+	console.log(recommendations);
+	
 	return (
 		<div 
 			className={`full-height bg-${activeTab} is-flex is-flex-wrap-wrap is-justify-content-space-around p-4`}

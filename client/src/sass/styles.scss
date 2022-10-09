@@ -1,8 +1,12 @@
 @charset "utf-8";
 
 /* set my variables */
+$green: rgb(126, 175, 148);
+$green-invert: findColorInvert($green);
+$custom-colors: ("green": ($green, $green-invert));
+
 $bg-films: rgb(234, 229, 217);
-$bg-books: rgb(126, 175, 148);
+$bg-books: $green;
 $bg-podcasts: rgb(115, 115, 115);
 
 /* set my classes */
@@ -29,6 +33,9 @@ $bg-podcasts: rgb(115, 115, 115);
 .recommendation {
 	width: 100px;
 }
+
+/* import my own files */
+@import "./components/detail";
 
 /* these should be working in bulma but aren't for some reason */
 /* .navbar-dropdown { */

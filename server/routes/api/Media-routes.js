@@ -3,6 +3,7 @@ const router = require('express').Router();
 const {
   getAllMedia,
   getMediaById,
+	getVideosById,
   createMedia,
   updateMedia,
   deleteMedia
@@ -13,6 +14,11 @@ router
   .route('/')
   .get(getAllMedia)
   .post(createMedia);
+	
+// /api/media/videos
+router
+	.route('/videos/:id')
+	.get(getVideosById)
 
 // /api/media/:id
 router
